@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Genius Manish 2026 - Auth</title>
+    <style>
+        body { margin: 0; background: #0d1117; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; padding: 15px; }
+        .auth-container { background: #161b22; padding: 25px; border-radius: 12px; border: 1px solid #30363d; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 100%; max-width: 400px; text-align: center; }
+        h2 { color: #58a6ff; margin-bottom: 20px; }
+        .tab-buttons { display: flex; justify-content: space-between; margin-bottom: 20px; gap: 10px; }
+        .tab-buttons button { flex: 1; padding: 10px; font-size: 14px; font-weight: bold; background: #21262d; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; cursor: pointer; }
+        .tab-buttons button.active { background: #238636; color: white; border-color: #2ea043; }
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; font-size: 14px; margin-bottom: 5px; color: #8b949e; }
+        input { width: 100%; padding: 10px; font-size: 15px; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; box-sizing: border-box; }
+        .btn-primary { width: 100%; padding: 12px; background: #238636; color: white; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 10px; transition: 0.3s; }
+        .btn-primary:hover { background: #2ea043; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>AI Genius Manish 2026</h2>
+        
+        <div class="tab-buttons">
+            <button id="loginTabBtn" class="active" onclick="switchTab('login')">1. लॉगिन</button>
+            <button id="registerTabBtn" onclick="switchTab('register')">2. नया अकाउंट (Gmail से)</button>
+        </div>
+
+        <!-- विकल्प 1: लॉगिन फॉर्म -->
+        <div id="loginFormSection">
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>आपका नाम (या Founder नाम):</label>
+                    <input type="text" id="loginName" placeholder="अपना नाम दर्ज करें" required>
+                </div>
+                <div class="input-group">
+                    <label>पासवर्ड (या मास्टर पासवर्ड):</label>
+                    <input type="password" id="loginPassword" placeholder="पासवर्ड दर्ज करें" required>
+                </div>
+                <button type="submit" class="btn-primary">प्रवेश करें</button>
+            </form>
+        </div>
+
+        <!-- विकल्प 2: नया अकाउंट फॉर्म -->
+        <div id="registerFormSection" style="display: none;">
+            <form onsubmit="handleRegister(event)">
+                <div class="input-group">
+                    <label>Gmail ID:</label>
+                    <input type="email" id="regEmail" placeholder="example@gmail.com" required>
+                </div>
+                <div class="input-group">
+                    <label>अपना पूरा नाम:</label>
+                    <input type="text" id="regName" placeholder="अपना नाम चुनें" required>
+                </div>
+                <div class="input-group">
+                    <label>नया पर्सनल पासवर्ड बनाएं:</label>
+                    <input type="password" id="regPassword" placeholder="एक गुप्त पासवर्ड बनाएं" required>
+                </div>
+                <div class="input-group">
+                    <label>इनविटेशन कोड (जो मनीष सर ने दिया हो):</label>
+                    <input type="password" id="regInvite" placeholder="इनविटेशन कोड डालें" required>
+                </div>
+                <button type="submit" class="btn-primary">अकाउंट बनाएं</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(type) {
+            if (type === 'login') {
+                document.getElementById('loginFormSection').style.display = 'block';
+                document.getElementById('registerFormSection').style.display = 'none';
+                document.getElementById('loginTabBtn').classList.add('active');
+                document.getElementById('registerTabBtn').classList.remove('active');
+            } else {
+                document.getElementById('loginFormSection').style.display = 'none';
+                document.getElementById('registerFormSection').style.display = 'block';
+                document.getElementById('loginTabBtn').classList.remove('active');
+                document.getElementById('registerTabBtn').classList.add('active');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const name = document.getElementById('loginName').value;
+            const pass = document.getElementById('loginPassword').value;
+
+            if (name.toLowerCase() === 'manish' && pass === 'manish77') {
+                alert("पहचान सत्यापित! स्वागत है मनीष गुप्ता सर...");
+                window.location.href = "founder.html";
+            } else {
+                alert("सामान्य यूजर लॉगिन सफल!");
+                window.location.href = "user-dashboard.html";
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const invite = document.getElementById('regInvite').value;
+            
+            if (invite === "user2026") {
+                alert("अकाउंट सफलतापूर्वक बन गया! अब आप लॉगिन कर सकते हैं।");
+                switchTab('login');
+            } else {
+                alert("गलत इनविटेशन कोड! आप अकाउंट नहीं बना सकते।");
+            }
+        }
+    </script>
+</body>
+</html>
+
