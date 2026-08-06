@@ -82,8 +82,24 @@
                 alert("सर्विस को तुरंत रोक दिया गया है।");
             } else if (type === 'pause') {
                 alert("सिस्टम को अस्थायी रूप से पॉज कर दिया गया है।");
+  // मनीष गुप्ता जी का फ़ायरबेस रियल-टाइम डेटाबेस कनेक्शन
+  const firebaseConfig = {
+    apiKey: "AIzaSyAccs4zEqYW-c5KCGoHq1KFsC",
+    authDomain: "://firebaseapp.com",
+    databaseURL: "https://firebaseio.com",
+    projectId: "aigeniusmanish2026",
+    storageBucket: "://appspot.com",
+    messagingSenderId: "723028754117",
+    appId: "1:723028754117:web:1c09cf21fffc5a6bd430b0",
+    measurementId: "G-4NTP35VCDY"
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const database = firebase.database();
+  console.log("AI_GENIUS_MANISH_2026: Database Connected.");
             }
         }
     </script>
 </body>
-</html>
