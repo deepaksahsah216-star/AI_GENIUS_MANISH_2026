@@ -184,3 +184,84 @@
   });
 </script>
 
+
+    <!-- सुनिश्चित करें कि यह कोड आपके dashboard.html के <script type="module"> के अंदर है -->
+<script type="module">
+  import { initializeApp } from "https://gstatic.com";
+  import { getDatabase, ref, push, onChildAdded, update } from "https://gstatic.com";
+
+  // मनीष जी का सही फ़ायरबेस कॉन्फ़िगरेशन
+  const firebaseConfig = {
+    apiKey: "AIzaSyAccs4zEqYW-c5KCGoHq1KFsCakC9b8Xes",
+    authDomain: "://firebaseapp.com",
+    databaseURL: "https://firebaseio.com",
+    projectId: "aigeniusmanish2026",
+    storageBucket: "aigeniusmanish2026.firebasestorage.app",
+    messagingSenderId: "723028754117",
+    appId: "1:723028754117:web:1c09cf21fffc54f96d7aac"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  console.log("Dashboard AI System Connected.");
+
+  // एआई (Gemini AI) से खुद सोचकर जवाब बनवाने का मुख्य फ़ंक्शन
+  async function askGeminiAI(userMessage) {
+      // नोट: यहाँ अपनी असली Google Gemini API Key डालें
+      const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
+      const url = `https://googleapis.com{GEMINI_API_KEY}`;
+
+      try {
+          const response = await fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  contents: [{
+                      parts: [{
+                          text: `तुम मनीष गुप्ता जी (IT Student) के पर्सनल एआई असिस्टेंट हो। कोई यूजर मनीष जी को व्हाट्सएप पर मैसेज भेज रहा है। इस मैसेज को समझकर बहुत ही बुद्धिमान, छोटा और मददगार जवाब हिंदी में लिखो। यूजर का मैसेज है: "${userMessage}"`
+                      }]
+                  }]
+              })
+          });
+
+          const data = await response.json();
+          // एआई का असली जवाब निकालना
+          return data.candidates[0].content.parts[0].text;
+      } catch (error) {
+          console.error("एआई एरर आया:", error);
+          return "नमस्ते! मनीष जी अभी थोड़े व्यस्त हैं। मैं उनका एआई असिस्टेंट हूँ, आपका मैसेज सुरक्षित नोट कर लिया गया है।";
+      }
+  }
+
+  // फ़ायरबेस में आने वाले नए व्हाट्सएप मैसेज को लाइव सुनना
+  const messagesRef = ref(database, 'notifications/');
+  onChildAdded(messagesRef, async (snapshot) => {
+      const messageId = snapshot.key;
+      const messageData = snapshot.val();
+
+      // अगर मैसेज व्हाट्सएप (WhatsApp) ऐप से आया है और अभी तक उसका जवाब नहीं दिया गया है
+      if (messageData.appName && messageData.appName.toLowerCase().includes("whatsapp") && !messageData.aiProcessed) {
+          console.log("नया व्हाट्सएप मैसेज मिला:", messageData.message);
+
+          // 1. एआई खुद सोचेगा और जवाब बनाएगा
+          const aiReply = await askGeminiAI(messageData.message);
+          console.log("एआई ने खुद यह जवाब तैयार किया:", aiReply);
+
+          // 2. एआई के जवाब को डेटाबेस के 'whatsapp_replies' फोल्डर में सेंड करना
+          const repliesRef = ref(database, 'whatsapp_replies/');
+          await push(repliesRef, {
+              to: messageData.title, // मैसेज भेजने वाले का नाम/नंबर
+              message: aiReply,
+              timestamp: new Date().toISOString()
+          });
+
+          // 3. मैसेज को मार्क कर देना ताकि एआई बार-बार उसी मैसेज का जवाब न दे
+          const currentMessageRef = ref(database, `notifications/${messageId}`);
+          await update(currentMessageRef, {
+              aiProcessed: true
+          });
+
+          console.log("एआई का जवाब नोटिफिकेशन सेंडिंग के लिए तैयार है!");
+      }
+  });
+</script>
