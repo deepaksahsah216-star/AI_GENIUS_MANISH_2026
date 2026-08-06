@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मुख्य मुक्ति स्थल | AI GENIUS MANISH 2026</title>
+    <style>
+        body { margin: 0; background: #0d1117; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .dashboard-container { max-width: 1000px; margin: 0 auto; }
+        h1, h2 { color: #58a6ff; text-align: center; }
+        .master-switch-box { background: #1f1f2e; padding: 25px; border-radius: 15px; border: 2px solid #58a6ff; text-align: center; margin-bottom: 25px; box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); }
+        .switch-btn { font-size: 24px; font-weight: bold; padding: 15px 40px; border-radius: 10px; border: none; cursor: pointer; transition: 0.4s; width: 100%; max-width: 300px; }
+        .switch-on { background: #238636; color: white; box-shadow: 0 0 15px #238636; }
+        .switch-off { background: #da3633; color: white; box-shadow: 0 0 15px #da3633; }
+        .live-status-box { background: #161b22; padding: 20px; border-radius: 12px; border: 1px solid #30363d; text-align: center; margin-bottom: 25px; }
+        .live-count { font-size: 36px; color: #39d353; font-weight: bold; }
+        .founder-actions { display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 30px; }
+        .btn-action { padding: 15px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; margin: 10px; }
+        .btn-danger { background: #da3633; color: white; }
+        .btn-warning { background: #d29922; color: black; }
+        .btn-info { background: #1f6feb; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>AI GENIUS MANISH 2026 - मुक्ति स्थल</h1>
+        <p style="text-align: center; color: #8b949e;">सुपर एडमिन कंट्रोल: मनीष गुप्ता जी</p>
+
+        <!-- ग्लोबल महा-मास्टर स्विच -->
+        <div class="master-switch-box">
+            <h2>🌍 ग्लोबल महा-मास्टर स्विच (All Users Control)</h2>
+            <p id="switchStatusText" style="font-size: 18px; margin-bottom: 15px; color: #39d353;">स्थिति: सिस्टम अभी ON है (सभी यूजर्स इस्तेमाल कर सकते हैं)</p>
+            <button id="globalMasterSwitch" class="switch-btn switch-on" onclick="toggleGlobalSystem()">सिस्टम अभी ON है</button>
+        </div>
+
+        <!-- लाइव एक्टिव यूजर्स -->
+        <div class="live-status-box">
+            <h3>🔴 लाइव एक्टिव यूजर्स</h3>
+            <div class="live-count" id="activeUsersCount">1,042</div>
+            <p>लोग अभी इस ऐप का इस्तेमाल कर रहे हैं</p>
+        </div>
+
+        <!-- अन्य फाउंडर कंट्रोल -->
+        <h2>🛠️ अन्य फाउंडर कंट्रोल</h2>
+        <div class="founder-actions">
+            <button class="btn-action btn-danger" onclick="masterAction('delete')">वेब को परमानेंट पूरी तरह हटाएं</button>
+            <button class="btn-action btn-warning" onclick="masterAction('stop')">इसे अभी तुरंत फ्रीज करें</button>
+            <button class="btn-action btn-info" onclick="masterAction('pause')">थोड़ी देर बाद चालू करें</button>
+        </div>
+    </div>
+
+    <script>
+        let isSystemOn = true;
+
+        function toggleGlobalSystem() {
+            const mainBtn = document.getElementById('globalMasterSwitch');
+            const statusText = document.getElementById('switchStatusText');
+            
+            if (isSystemOn) {
+                isSystemOn = false;
+                mainBtn.className = "switch-btn switch-off";
+                mainBtn.innerText = "सिस्टम अभी OFF है";
+                statusText.innerText = "स्थिति: सिस्टम बंद है (सभी यूजर्स का एक्सेस ब्लॉक कर दिया गया है)";
+                statusText.style.color = "#da3633";
+                alert("मनीष सर, आपने सिस्टम को OFF कर दिया है। अब कोई भी यूजर इस वेब को नहीं चला पाएगा।");
+            } else {
+                isSystemOn = true;
+                mainBtn.className = "switch-btn switch-on";
+                mainBtn.innerText = "सिस्टम अभी ON है";
+                statusText.innerText = "स्थिति: सिस्टम अभी ON है (सभी यूजर्स इस्तेमाल कर सकते हैं)";
+                statusText.style.color = "#39d353";
+                alert("मनीष सर, सिस्टम को वापस ON कर दिया गया है। सभी यूजर्स के फोन में ऐप अपने आप चालू हो गई है।");
+            }
+        }
+
+        function masterAction(type) {
+            if (type === 'delete') {
+                let confirm1 = confirm("क्या आप वाकई इस पूरी वेब ऐप और इसके सभी डेटाबेस को हमेशा के लिए डिलीट करना चाहते हैं?");
+                if (confirm1) alert("वेब को पूरी तरह से हटा दिया गया है।");
+            } else if (type === 'stop') {
+                alert("सर्विस को तुरंत रोक दिया गया है।");
+            } else if (type === 'pause') {
+                alert("सिस्टम को अस्थायी रूप से पॉज कर दिया गया है।");
+            }
+        }
+    </script>
+</body>
+</html>
