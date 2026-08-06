@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D स्वागत गेटवे | मनीष सर</title>
+    <style>
+        body { margin: 0; background: #0d1117; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        .founder-container { text-align: center; color: #fff; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; position: relative; }
+        .video-box { width: 320px; height: 320px; border-radius: 50%; overflow: hidden; border: 4px solid #238636; box-shadow: 0 0 30px #238636; background: #000; margin-bottom: 20px; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .secret-box-two { display: none; margin-top: 20px; animation: fadeIn 1s ease-in-out; background: #161b22; padding: 25px; border-radius: 12px; border: 1px solid #30363d; box-shadow: 0 4px 20px rgba(0,0,0,0.6); z-index: 10; }
+        input { padding: 12px; font-size: 16px; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; margin-top: 15px; text-align: center; width: 80%; max-width: 250px; }
+        button { padding: 12px 25px; background: #238636; color: #fff; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 15px; transition: 0.3s; }
+        button:hover { background: #2ea043; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="founder-container">
+        <!-- 3D एनिमेटेड व्यक्ति की मूवी/वीडियो -->
+        <div class="video-box">
+            <video id="welcomeVideo" autoplay playsinline>
+                <source src="https://your-cloud-storage.com" type="video/mp4">
+                आपका ब्राउज़र इस वीडियो को सपोर्ट नहीं करता।
+            </video>
+        </div>
+        
+        <h2 id="statusText">मनीष सर का स्वागत हो रहा है...</h2>
+
+        <!-- दूसरा सीक्रेट बॉक्स जो 3D वीडियो खत्म होने के बाद खुलेगा -->
+        <div id="secondSecretSection" class="secret-box-two">
+            <h3>सुरक्षा जांच (Level 2)</h3>
+            <p>मनीष गुप्ता जी, मुख्य मुक्ति स्थल पर जाने के लिए दूसरा पासवर्ड डालें:</p>
+            <input type="password" id="secondSecretInput" placeholder="दूसरा गुप्त पासवर्ड">
+            <br>
+            <button onclick="verifySecondSecret()">डैशबोर्ड पर जाएँ</button>
+        </div>
+    </div>
+
+    <script>
+        const welcomeVideo = document.getElementById('welcomeVideo');
+        const statusText = document.getElementById('statusText');
+        const secondSecretSection = document.getElementById('secondSecretSection');
+
+        // 3D कैरेक्टर की वीडियो/मूवी खत्म होने पर दूसरा बॉक्स दिखाना
+        welcomeVideo.onended = function() {
+            statusText.innerText = "स्वागत प्रक्रिया पूरी हुई, मनीष गुप्ता जी!";
+            secondSecretSection.style.display = 'block';
+        };
+
+        // वीडियो लोड न होने पर 10 सेकंड का बैकअप टाइमर
+        setTimeout(() => {
+            if (secondSecretSection.style.display !== 'block') {
+                statusText.innerText = "स्वागत प्रक्रिया पूरी हुई, मनीष गुप्ता जी!";
+                secondSecretSection.style.display = 'block';
+            }
+        }, 10500);
+
+        // दूसरा पासवर्ड वेरीफाई करने का लॉजिक
+        function verifySecondSecret() {
+            const secretTwo = document.getElementById('secondSecretInput').value;
+            if (secretTwo === "gupta2026") {
+                alert("वेरीफाई हुआ! मुख्य मुक्ति स्थल (डैशबोर्ड) पर भेजा जा रहा है...");
+                window.location.href = "dashboard.html"; 
+            } else {
+                alert("गलत पासवर्ड! कृपया सही कोड डालें, मनीष गुप्ता जी।");
+            }
+        }
+    </script>
+</body>
+</html>
