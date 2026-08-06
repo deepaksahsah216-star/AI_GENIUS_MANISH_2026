@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>यूजर डैशबोर्ड | AI GENIUS MANISH 2026</title>
+    <style>
+        body { margin: 0; background: #0d1117; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .user-box { background: #161b22; padding: 30px; border-radius: 15px; border: 1px solid #30363d; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 90%; max-width: 400px; }
+        h2 { color: #58a6ff; margin-bottom: 5px; }
+        .status-text { font-size: 18px; margin: 15px 0; font-weight: bold; }
+        .power-btn { width: 140px; height: 140px; border-radius: 50%; font-size: 22px; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; outline: none; }
+        .power-on { background: #238636; color: white; box-shadow: 0 0 25px rgba(35, 134, 54, 0.6); }
+        .power-off { background: #da3633; color: white; box-shadow: 0 0 25px rgba(218, 54, 51, 0.6); }
+        .footer-note { font-size: 12px; color: #8b949e; margin-top: 25px; }
+    </style>
+</head>
+<body>
+
+    <div class="user-box">
+        <h2 id="greetingText">नमस्ते यूजर!</h2>
+        <p style="color: #8b949e; font-size: 14px;">AI ऑटो-रिस्पॉन्डर कंट्रोल पैनल</p>
+
+        <!-- यूजर का व्यक्तिगत बड़ा ON/OFF ऑप्शन -->
+        <div class="status-text" id="statusDisplay" style="color: #39d353;">सर्विस स्थिति: चालू (Active)</div>
+        
+        <button id="userPowerBtn" class="power-btn power-on" onclick="toggleUserAppService()">ON</button>
+        
+        <p style="margin-top: 15px; font-size: 13px; color: #c9d1d9;">
+            बटन दबाकर अपने मोबाइल की रिस्पॉन्स सर्विस को कभी भी रोकें या चालू करें।
+        </p>
+
+        <div class="footer-note">Powered by AI GENIUS MANISH 2026</div>
+    </div>
+
+    <script>
+        let isAppActive = true;
+
+        function toggleUserAppService() {
+            const btn = document.getElementById('userPowerBtn');
+            const display = document.getElementById('statusDisplay');
+
+            if (isAppActive) {
+                isAppActive = false;
+                btn.className = "power-btn power-off";
+                btn.innerText = "OFF";
+                display.innerText = "सर्विस स्थिति: पूरी तरह शांत (Stopped)";
+                display.style.color = "#da3633";
+                alert("आपके मोबाइल में सिस्टम पूरी तरह शांत हो गया है। अब कोई मैसेज प्रोसेस नहीं होगा।");
+            } else {
+                isAppActive = true;
+                btn.className = "power-btn power-on";
+                btn.innerText = "ON";
+                display.innerText = "सर्विस स्थिति: चालू (Active)";
+                display.style.color = "#39d353";
+                alert("सिस्टम वापस चालू हो गया है! AI आपके संदेशों का जवाब देना शुरू कर रहा है।");
+            }
+        }
+    </script>
+</body>
+</html>
